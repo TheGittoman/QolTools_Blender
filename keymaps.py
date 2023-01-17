@@ -2,12 +2,12 @@ import bpy
 
 # create keymappings for operators
 
-keys = {'MIRROR': [{'label': 'Mirror x', 'keymap': 'Mesh', 'idname': 'mesh.mirror_x', 'type': 'X', 'value': 'PRESS', "alt": True, "shift": True},
-                  {'label': 'Mirror y', 'keymap': 'Mesh', 'idname': 'mesh.mirror_y', 'type': 'S', 'value': 'PRESS', "alt": True, "shift": True},
-                  {'label': 'Mirror z', 'keymap': 'Mesh', 'idname': 'mesh.mirror_z', 'type': 'Z', 'value': 'PRESS', "alt": True, "shift": True},
-                  {'label': 'Mirror -x', 'keymap': 'Mesh', 'idname': 'mesh.mirror_nx', 'type': 'X', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True},
-                  {'label': 'Mirror -y', 'keymap': 'Mesh', 'idname': 'mesh.mirror_ny', 'type': 'S', 'value': 'PRESS', "alt": True,"ctrl": True, "shift": True},
-                  {'label': 'Mirror -z', 'keymap': 'Mesh', 'idname': 'mesh.mirror_nz', 'type': 'Z', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True}
+keys = {'MIRROR':[{'label': 'Mirror x', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'X', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "mode","POSITIVE_X" )]},
+                  {'label': 'Mirror y', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'S', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "mode","POSITIVE_Y" )]},
+                  {'label': 'Mirror z', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'Z', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "mode","POSITIVE_Z" )]},
+                  {'label': 'Mirror -x', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'X', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True, "properties": [( "mode","NEGATIVE_X" )]},
+                  {'label': 'Mirror -y', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'S', 'value': 'PRESS', "alt": True,"ctrl": True, "shift": True, "properties": [( "mode","NEGATIVE_Y" )]},
+                  {'label': 'Mirror -z', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'Z', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True, "properties": [( "mode","NEGATIVE_Z" )]}
 ]}
 
 def register_keymaps():
