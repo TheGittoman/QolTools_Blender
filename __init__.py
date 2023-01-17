@@ -5,7 +5,7 @@ from .keymaps import keys
 
 
 bl_info = {
-    "name": "My Addon",
+    "name": "QolTools",
     "author": "Tomi Vartiainen",
     "version": (1, 0, 0),
     "blender": (3, 5, 0),
@@ -17,7 +17,7 @@ bl_info = {
     }
 
 class qol_tools(bpy.types.Operator):
-    bl_idname = "object.gol_tools"
+    bl_idname = "mesh.gol_tools"
     bl_label = "Tool Name"
 
     def execute(self, context):
