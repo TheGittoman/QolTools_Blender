@@ -30,19 +30,16 @@ class qol_tools(bpy.types.Operator):
         print("this does nothing")
 
 class MESH_OT_mirror(bpy.types.Operator):
-    bl_idname = "mesh.mirror_nx"
-    bl_label = "mirror negative x"
+    bl_idname = "mesh.mirror"
+    bl_label = "mirror operator"
     bl_options = {'REGISTER', 'UNDO'}
-    direction: bpy.props.StringProperty(
-        name="direction",
-        description="direction of mirror"
-    )
+    direction: bpy.props.StringProperty( name="direction", default="POSITIVE_X")
 
     def execute(self, context):
         if context.active_object and context.active_object.mode == "EDIT":
             bpy.ops.mesh.select_all(action="DESELECT")
             bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(self.direction)
+            bpy.ops.mesh.symmetrize(direction=self.direction)
             bpy.ops.mesh.select_all()
         return {"FINISHED"}
 
