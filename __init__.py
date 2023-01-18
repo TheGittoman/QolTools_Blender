@@ -29,92 +29,24 @@ class qol_tools(bpy.types.Operator):
     def do_stuff(self):
         print("this does nothing")
 
-class mirror_x(bpy.types.Operator):
-    bl_idname = "mesh.mirror_x"
-    bl_label = "mirror x"
+class MESH_OT_mirror(bpy.types.Operator):
+    bl_idname = "mesh.mirror"
+    bl_label = "mirror operator"
     bl_options = {'REGISTER', 'UNDO'}
+    direction: bpy.props.StringProperty( name="direction", default="POSITIVE_X")
 
     def execute(self, context):
         if context.active_object and context.active_object.mode == "EDIT":
             bpy.ops.mesh.select_all(action="DESELECT")
             bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(direction="POSITIVE_X")
+            bpy.ops.mesh.symmetrize(direction=self.direction)
             bpy.ops.mesh.select_all()
         return {"FINISHED"}
 
-class mirror_y(bpy.types.Operator):
-    bl_idname = "mesh.mirror_y"
-    bl_label = "mirror y"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        if context.active_object and context.active_object.mode == "EDIT":
-            bpy.ops.mesh.select_all(action="DESELECT")
-            bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(direction="POSITIVE_Y")
-            bpy.ops.mesh.select_all()
-        return {"FINISHED"}
-
-class mirror_z(bpy.types.Operator):
-    bl_idname = "mesh.mirror_z"
-    bl_label = "mirror z"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        if context.active_object and context.active_object.mode == "EDIT":
-            bpy.ops.mesh.select_all(action="DESELECT")
-            bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(direction="POSITIVE_Z")
-            bpy.ops.mesh.select_all()
-        return {"FINISHED"}
-
-class mirror_nx(bpy.types.Operator):
-    bl_idname = "mesh.mirror_nx"
-    bl_label = "mirror negative x"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        if context.active_object and context.active_object.mode == "EDIT":
-            bpy.ops.mesh.select_all(action="DESELECT")
-            bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(direction="NEGATIVE_X")
-            bpy.ops.mesh.select_all()
-        return {"FINISHED"}
-
-class mirror_ny(bpy.types.Operator):
-    bl_idname = "mesh.mirror_ny"
-    bl_label = "mirror negative y"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        if context.active_object and context.active_object.mode == "EDIT":
-            bpy.ops.mesh.select_all(action="DESELECT")
-            bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(direction="NEGATIVE_Y")
-            bpy.ops.mesh.select_all()
-        return {"FINISHED"}
-
-class mirror_nz(bpy.types.Operator):
-    bl_idname = "mesh.mirror_nz"
-    bl_label = "mirror negative z"
-    bl_options = {'REGISTER', 'UNDO'}
-
-    def execute(self, context):
-        if context.active_object and context.active_object.mode == "EDIT":
-            bpy.ops.mesh.select_all(action="DESELECT")
-            bpy.ops.mesh.select_all()
-            bpy.ops.mesh.symmetrize(direction="NEGATIVE_Z")
-            bpy.ops.mesh.select_all()
-        return {"FINISHED"}
 # add classes to a list
 classes = [
     qol_tools,
-    mirror_x,
-    mirror_y,
-    mirror_z,
-    mirror_nx,
-    mirror_ny,
-    mirror_nz,
+    MESH_OT_mirror,
 ]
 
 # register all classes
