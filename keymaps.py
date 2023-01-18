@@ -2,12 +2,12 @@ import bpy
 
 # create keymappings for operators
 
-keys = {'MIRROR':[{'label': 'Mirror x', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'X', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "mode","POSITIVE_X" )]},
-                  {'label': 'Mirror y', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'S', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "mode","POSITIVE_Y" )]},
-                  {'label': 'Mirror z', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'Z', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "mode","POSITIVE_Z" )]},
-                  {'label': 'Mirror -x', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'X', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True, "properties": [( "mode","NEGATIVE_X" )]},
-                  {'label': 'Mirror -y', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'S', 'value': 'PRESS', "alt": True,"ctrl": True, "shift": True, "properties": [( "mode","NEGATIVE_Y" )]},
-                  {'label': 'Mirror -z', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'Z', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True, "properties": [( "mode","NEGATIVE_Z" )]}
+keys = {'MIRROR':[{'label': 'Mirror x', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'X', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "direction","POSITIVE_X" )]},
+                  {'label': 'Mirror y', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'S', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "direction","POSITIVE_Y" )]},
+                  {'label': 'Mirror z', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'Z', 'value': 'PRESS', "alt": True, "shift": True, "properties": [( "direction","POSITIVE_Z" )]},
+                  {'label': 'Mirror -x', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'X', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True, "properties": [( "direction","NEGATIVE_X" )]},
+                  {'label': 'Mirror -y', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'S', 'value': 'PRESS', "alt": True,"ctrl": True, "shift": True, "properties": [( "direction","NEGATIVE_Y" )]},
+                  {'label': 'Mirror -z', 'keymap': 'Mesh', 'idname': 'mesh.mirror', 'type': 'Z', 'value': 'PRESS', "alt": True, "ctrl": True, "shift": True, "properties": [( "direction","NEGATIVE_Z" )]}
 ]}
 
 def register_keymaps():
@@ -16,32 +16,33 @@ def register_keymaps():
     kc = wm.keyconfigs.addon
     keymaps = []
 
-    for mapping in keys['MIRROR']:
-        keymap = mapping.get("keymap")
-        space_type = mapping.get("space_type", "EMPTY")
+    for mapping in keys:
+        for v in keys[mapping]:
+            keymap = v.get("keymap")
+            space_type = v.get("space_type", "EMPTY")
 
-        if keymap:
-            km = kc.keymaps.new(name=keymap, space_type=space_type)
+            if keymap:
+                km = kc.keymaps.new(name=keymap, space_type=space_type)
 
-            if km:
-                idname = mapping.get("idname")
-                type = mapping.get("type")
-                value = mapping.get("value")
+                if km:
+                    idname = v.get("idname")
+                    type = v.get("type")
+                    value = v.get("value")
 
-                shift = mapping.get("shift", False)
-                ctrl = mapping.get("ctrl", False)
-                alt = mapping.get("alt", False)
+                    shift = v.get("shift", False)
+                    ctrl = v.get("ctrl", False)
+                    alt = v.get("alt", False)
 
-                kmi = km.keymap_items.new(idname, type, value, shift=shift, ctrl=ctrl, alt=alt)
+                    kmi = km.keymap_items.new(idname, type, value, shift=shift, ctrl=ctrl, alt=alt)
 
-                if kmi:
-                    properties = mapping.get("properties")
+                    if kmi:
+                        properties = v.get("properties")
 
-                    if properties:
-                        for name, value in properties:
-                            setattr(kmi.properties, name, value)
+                        if properties:
+                            for name, value in properties:
+                                setattr(kmi.properties, name, value)
 
-                    keymaps.append((km, kmi))
+                        keymaps.append((km, kmi))
     return keymaps
 
 def unregister_keymaps(keymaps):
