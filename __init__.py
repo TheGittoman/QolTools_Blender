@@ -1,7 +1,6 @@
 import bpy
 import bmesh
 from . import keymaps
-from .keymaps import keys
 
 
 bl_info = {
