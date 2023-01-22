@@ -15,19 +15,6 @@ bl_info = {
     "category": "Mesh"
     }
 
-class qol_tools(bpy.types.Operator):
-    bl_idname = "mesh.gol_tools"
-    bl_label = "Tool Name"
-
-    def execute(self, context):
-        self.context = context
-        if context.active_object and context.active_object.mode == "EDIT":
-            self.do_stuff()
-        return {"FINISHED"}
-    
-    def do_stuff(self):
-        print("this does nothing")
-
 class MESH_OT_mirror(bpy.types.Operator):
     bl_idname = "mesh.mirror"
     bl_label = "mirror operator"
@@ -44,7 +31,6 @@ class MESH_OT_mirror(bpy.types.Operator):
 
 # add classes to a list
 classes = [
-    qol_tools,
     MESH_OT_mirror,
 ]
 
